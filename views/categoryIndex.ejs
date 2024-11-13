@@ -10,11 +10,10 @@
     <ul>
       <% categoryContent.forEach(item => { %>
       <li>
-        <strong> <%= categoryContent.item %> </strong>
+        <strong><%= item.name %></strong> - Quantity: <%= item.quantity %>
       </li>
       <% }); %>
     </ul>
-    <a href="/addCategory">Create a New Category</a>
-    <a href="/items">Display all Items in Inventory</a>
+    <a href="/">Back to all Categories</a>
   </body>
 </html>
