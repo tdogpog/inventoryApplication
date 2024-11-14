@@ -1,12 +1,22 @@
 const { Router } = require("express");
 
+const {
+  displayAllCategories,
+  displayAllItems,
+  displayCategoryItems,
+  addCategory,
+  addItem,
+  postCategory,
+  postItem,
+} = require("../controllers/inventoryController");
+
 const inventoryRouter = Router();
 
 inventoryRouter.get("/", displayAllCategories);
 
 inventoryRouter.get("/items", displayAllItems);
 
-inventoryRouter.get("/categories/:id", displayCategory);
+inventoryRouter.get("/categories/:id", displayCategoryItems);
 
 inventoryRouter.get("/addCategory", addCategory);
 
