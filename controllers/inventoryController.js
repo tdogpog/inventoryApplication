@@ -27,15 +27,17 @@ async function displayAllItems(req, res) {
 
 async function displayCategoryItems(req, res) {
   const categoryID = req.params.id;
+  console.log("Category ID from URL:", categoryID);
   try {
-    const categoryContent = await getCategoryItems(categoryID);
+    const categoryItems = await getCategoryItems(categoryID);
+    console.log(categoryItems);
     const categoryName =
-      categoryContent.length > 0
-        ? categoryContent[0].category_name
+      categoryItems.length > 0
+        ? categoryItems[0].category_name
         : "Empty Category";
     res.render("categoryIndex", {
       title: `Items in ${categoryName}`,
-      categoryContent,
+      categoryItems,
     });
   } catch (error) {
     console.error("Error fetching category items:", error.message);

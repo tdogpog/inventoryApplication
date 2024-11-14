@@ -4,7 +4,7 @@ async function getAllCategories() {
   try {
     console.log("Running query to fetch categories...");
     const result = await pool.query("SELECT * FROM categories ORDER BY name");
-    console.log(result.rows);
+
     return result.rows;
   } catch (error) {
     console.error("Error in querying pool getallCategories:", error.message);
@@ -13,11 +13,13 @@ async function getAllCategories() {
 }
 
 async function getAllItems() {
+  console.log("Running query to fetch all items");
   const result = await pool.query("SELECT * FROM items ORDER BY name");
   return result.rows;
 }
 
 async function getCategoryItems(categoryID) {
+  console.log("Running query to fetch categories...");
   const result = await pool.query(
     `SELECT items.id, items.name, items.quantity, categories.name AS category_name 
         FROM items 
@@ -26,11 +28,13 @@ async function getCategoryItems(categoryID) {
         WHERE categories.id = $1`,
     [categoryID]
   );
+
   return result.rows;
 }
 
 async function insertCategory(categoryName) {
   const query = "INSERT INTO categories (name) VALUES ($1)";
+  console.log(query);
   await pool.query(query, [categoryName]);
 }
 
@@ -45,6 +49,7 @@ async function insertItem(itemName, quantity, categories) {
   //     }
   //   ]
   const query = "INSERT INTO items (name,quantity) VALUES ($1,$2) RETURNING id";
+  console.log(query);
   const result = await pool.query(query, [itemName, quantity]);
   const itemID = result.rows[0].id;
 

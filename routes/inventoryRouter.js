@@ -16,7 +16,7 @@ inventoryRouter.get("/", displayAllCategories);
 
 inventoryRouter.get("/items", displayAllItems);
 
-inventoryRouter.get("/categories/:id", displayCategoryItems);
+inventoryRouter.get("/category/:id", displayCategoryItems);
 
 inventoryRouter.get("/addCategory", addCategory);
 
