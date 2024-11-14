@@ -1,8 +1,15 @@
 const pool = require("./pool");
 
 async function getAllCategories() {
-  const result = await pool.query("SELECT * FROM categories ORDER BY name");
-  return result.rows;
+  try {
+    console.log("Running query to fetch categories...");
+    const result = await pool.query("SELECT * FROM categories ORDER BY name");
+    console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.error("Error in querying pool getallCategories:", error.message);
+    throw error;
+  }
 }
 
 async function getAllItems() {

@@ -11,6 +11,7 @@ async function displayAllCategories(req, res) {
     const categories = await getAllCategories();
     res.render("index", { title: "Inventory Main Menu", categories });
   } catch (error) {
+    console.error("Error fetching homepage:", error.message);
     res.status(500).send("Error fetching categories for homepage");
   }
 }
@@ -31,7 +32,7 @@ async function displayCategoryItems(req, res) {
     const categoryName =
       categoryContent.length > 0
         ? categoryContent[0].category_name
-        : "Unknown Category";
+        : "Empty Category";
     res.render("categoryIndex", {
       title: `Items in ${categoryName}`,
       categoryContent,
