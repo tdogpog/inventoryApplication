@@ -10,14 +10,14 @@ async function getAllItems() {
   return result.rows;
 }
 
-async function getCategoryItems(categoryName) {
+async function getCategoryItems(categoryID) {
   const result = await pool.query(
     `SELECT items.id, items.name, items.quantity, categories.name AS category_name 
         FROM items 
         JOIN item_category ON items.id = item_category.item_id
         JOIN categories ON item_category.category_id = categories.id
-        WHERE categories.name = $1`,
-    [categoryName]
+        WHERE categories.id = $1`,
+    [categoryID]
   );
   return result.rows;
 }
