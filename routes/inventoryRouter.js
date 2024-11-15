@@ -6,6 +6,7 @@ const {
   displayCategoryItems,
   addCategory,
   addItem,
+  getUnsortedItems,
   postCategory,
   postItem,
 } = require("../controllers/inventoryController");
@@ -21,6 +22,8 @@ inventoryRouter.get("/category/:id", displayCategoryItems);
 inventoryRouter.get("/addCategory", addCategory);
 
 inventoryRouter.get("/addItem", addItem);
+
+inventoryRouter.get("/unsorted", getUnsortedItems);
 
 inventoryRouter.post("/addCategory", postCategory);
 

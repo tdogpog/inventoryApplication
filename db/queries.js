@@ -61,10 +61,23 @@ async function insertItem(itemName, quantity, category) {
   }
 }
 
+async function getUnsorted() {
+  console.log("Running query to fetch unsorted items");
+  const query = `
+    SELECT items.id, items.name, items.quantity 
+    FROM items 
+    LEFT JOIN item_category ON items.id = item_category.item_id 
+    WHERE item_category.item_id IS NULL;
+  `;
+  result = await pool.query(query);
+  return result;
+}
+
 module.exports = {
   getAllCategories,
   getAllItems,
   getCategoryItems,
+  getUnsorted,
   insertCategory,
   insertItem,
 };

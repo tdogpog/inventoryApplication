@@ -4,6 +4,7 @@ const {
   getCategoryItems,
   insertCategory,
   insertItem,
+  getUnsorted,
 } = require("../db/queries");
 
 async function displayAllCategories(req, res) {
@@ -82,12 +83,23 @@ async function postItem(req, res) {
   }
 }
 
+async function getUnsortedItems(req, res) {
+  try {
+    const unsorted = await getUnsorted();
+    res.render("unsorted", { title: "Unsorted Items", unsorted });
+  } catch (error) {
+    console.error("Error fetching orphans from query:", error.message);
+    res.status(500).send("Error fetching unsorted items");
+  }
+}
+
 module.exports = {
   displayAllCategories,
   displayAllItems,
   displayCategoryItems,
   addCategory,
   addItem,
+  getUnsortedItems,
   postCategory,
   postItem,
 };
