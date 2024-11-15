@@ -9,7 +9,9 @@
     <h1><%= title %></h1>
     <ul>
       <% items.forEach(item => { %>
-      <li><%= item.name %> <%= item.quantity %></li>
+      <li>
+        <strong><%= item.name %> </strong> - Quantity: <%= item.quantity %>
+      </li>
       <% }); %>
     </ul>
     <a href="/">Back to Home</a>

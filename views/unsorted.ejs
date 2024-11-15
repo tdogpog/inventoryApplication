@@ -8,14 +8,18 @@
   <body>
     <h1><%= title %></h1>
     <ul>
-      <% unsorted.forEach(item => { %>
-      <li><%= item.name %> - Quantity <%= item.quantity%></li>
-      <% }); %>
+      <% if (unsorted.length > 0) { %> <% unsorted.forEach(item => { %>
+      <li><%= item.name %> - Quantity: <%= item.quantity %></li>
+      <% }); %> <% } else { %>
+      <li>No unsorted items found.</li>
+      <% } %>
     </ul>
+
     <h2>Options</h2>
     <ul>
       <li><button>Submit Changes</button></li>
       <li>Delete all items</li>
+      <li><a href="/">Back to Home</a></li>
     </ul>
   </body>
 </html>

@@ -8,11 +8,14 @@
   <body>
     <h1><%= title %></h1>
     <ul>
-      <% categoryItems.forEach(item => { %>
+      <% if (categoryItems.length > 0) { %> <% categoryItems.forEach(item => {
+      %>
       <li>
         <strong><%= item.name %></strong> - Quantity: <%= item.quantity %>
       </li>
-      <% }); %>
+      <% }); %> <% } else { %>
+      <li>No items found in this category</li>
+      <% } %>
     </ul>
     <a href="/">Back to all Categories</a>
   </body>
