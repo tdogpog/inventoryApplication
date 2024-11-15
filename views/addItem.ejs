@@ -12,9 +12,9 @@
       <input type="text" id="itemName" name="itemName" required />
       <label for="quantity">Quantity:</label>
       <input type="number" id="quantity" name="quantity" required />
-      <label for="categories">Categories:</label>
-      <select id="categories" name="categories" multiple required>
-        <% categories.forEach(category => { %>
+      <label for="category">Categories:</label>
+      <select id="category" name="category" multiple required>
+        <% category.forEach(category => { %>
         <option value="<%= category.id %>"><%= category.name %></option>
         <% }); %>
       </select>

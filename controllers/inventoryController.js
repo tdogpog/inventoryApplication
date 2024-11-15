@@ -49,8 +49,15 @@ function addCategory(req, res) {
   res.render("addCategory", { title: "New Category" });
 }
 
-function addItem(req, res) {
-  res.render("addItem", { title: "New Item" });
+async function addItem(req, res) {
+  //we need to fetch the categories for the <select> html element
+  try {
+    const categories = await getAllCategories();
+    res.render("addItem", { title: "New Item", category: categories });
+  } catch (error) {
+    console.error("Error fetching categories:", error.message);
+    res.status(500).send("Error fetching categories for addItem");
+  }
 }
 
 async function postCategory(req, res) {
@@ -64,11 +71,13 @@ async function postCategory(req, res) {
 }
 
 async function postItem(req, res) {
-  const { itemName, quantity, categories } = req.body;
+  const { itemName, quantity, category } = req.body;
+  console.log("Categories from form:", category);
   try {
-    await insertItem(itemName, quantity, categories);
+    await insertItem(itemName, quantity, category);
     res.redirect("/");
   } catch (error) {
+    console.error("Error posting new item:", error.message);
     res.status(500).send("Error posting new item");
   }
 }

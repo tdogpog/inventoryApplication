@@ -38,27 +38,25 @@ async function insertCategory(categoryName) {
   await pool.query(query, [categoryName]);
 }
 
-async function insertItem(itemName, quantity, categories) {
+async function insertItem(itemName, quantity, category) {
   //insert items but grab id of insertion
   // to put into relational table
   //typically inserts return nothing
-  // we make it return
-  //   [
-  //     {
-  //       "id": 123
-  //     }
-  //   ]
   const query = "INSERT INTO items (name,quantity) VALUES ($1,$2) RETURNING id";
   console.log(query);
   const result = await pool.query(query, [itemName, quantity]);
+  //grab the sole itemID
   const itemID = result.rows[0].id;
 
   const insertItemRelational =
     "INSERT INTO item_category (item_id,category_id) VALUES ($1,$2)";
 
+  console.log("Inserting into item_category with item ID:", itemID);
+  console.log("Categories to insert:", category);
+
   //option value= returns an array of ids we need to loop over
   // for (const of array) to get values instead of indexes in js
-  for (const categoryId of categories) {
+  for (const categoryId of category) {
     await pool.query(insertItemRelational, [itemID, categoryId]);
   }
 }
