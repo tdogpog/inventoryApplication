@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <ul>
+      <% unsorted.forEach(item => { %>
+      <li><%= item.name %> - Quantity <%= item.quantity%></li>
+      <% }); %>
+    </ul>
+    <h2>Options</h2>
+    <ul>
+      <li><button>Submit Changes</button></li>
+      <li>Delete all items</li>
+    </ul>
+  </body>
+</html>
