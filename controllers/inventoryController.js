@@ -33,11 +33,9 @@ async function displayCategoryItems(req, res) {
     const categoryItems = await getCategoryItems(categoryID);
     console.log(categoryItems);
     const categoryName =
-      categoryItems.length > 0
-        ? categoryItems[0].category_name
-        : "Empty Category";
+      categoryItems.length > 0 ? categoryItems[0].category_name : "Empty";
     res.render("categoryIndex", {
-      title: `Items in ${categoryName}`,
+      title: `${categoryName} Category`,
       categoryItems,
     });
   } catch (error) {
@@ -86,6 +84,7 @@ async function postItem(req, res) {
 async function getUnsortedItems(req, res) {
   try {
     const unsorted = await getUnsorted();
+
     res.render("unsorted", { title: "Unsorted Items", unsorted });
   } catch (error) {
     console.error("Error fetching orphans from query:", error.message);

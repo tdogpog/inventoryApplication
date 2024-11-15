@@ -70,7 +70,9 @@ async function getUnsorted() {
     WHERE item_category.item_id IS NULL;
   `;
   result = await pool.query(query);
-  return result;
+
+  console.log(result.rows);
+  return result.rows;
 }
 
 module.exports = {
