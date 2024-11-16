@@ -1,6 +1,6 @@
 const pool = require("./pool");
 
-async function getAllCategories() {
+async function getAllCategoriesQuery() {
   try {
     console.log("Running query to fetch categories...");
     const result = await pool.query("SELECT * FROM categories ORDER BY name");
@@ -12,13 +12,13 @@ async function getAllCategories() {
   }
 }
 
-async function getAllItems() {
+async function getAllItemsQuery() {
   console.log("Running query to fetch all items");
   const result = await pool.query("SELECT * FROM items ORDER BY name");
   return result.rows;
 }
 
-async function getCategoryItems(categoryID) {
+async function getCategoryItemsQuery(categoryID) {
   console.log("Running query to fetch categories...");
   const result = await pool.query(
     `SELECT items.id, items.name, items.quantity, categories.name AS category_name 
@@ -32,13 +32,13 @@ async function getCategoryItems(categoryID) {
   return result.rows;
 }
 
-async function insertCategory(categoryName) {
+async function insertCategoryQuery(categoryName) {
   const query = "INSERT INTO categories (name) VALUES ($1)";
   console.log(query);
   await pool.query(query, [categoryName]);
 }
 
-async function insertItem(itemName, quantity, category) {
+async function insertItemQuery(itemName, quantity, category) {
   //insert items but grab id of insertion
   // to put into relational table
   //typically inserts return nothing
@@ -61,7 +61,7 @@ async function insertItem(itemName, quantity, category) {
   }
 }
 
-async function getUnsorted() {
+async function getUnsortedQuery() {
   console.log("Running query to fetch unsorted items");
   const query = `
     SELECT items.id, items.name, items.quantity 
@@ -76,10 +76,10 @@ async function getUnsorted() {
 }
 
 module.exports = {
-  getAllCategories,
-  getAllItems,
-  getCategoryItems,
-  getUnsorted,
-  insertCategory,
-  insertItem,
+  getAllCategoriesQuery,
+  getAllItemsQuery,
+  getCategoryItemsQuery,
+  getUnsortedQuery,
+  insertCategoryQuery,
+  insertItemQuery,
 };
